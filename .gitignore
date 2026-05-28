@@ -1,1 +1,13 @@
+# Ignore raw large data
+data/raw/
+hotel_bookings.csv
+*.csv
+
+# But allow sample data
+!data/sample/
+!data/sample/*.csv
+
+# System files
 .DS_Store
+__pycache__/
+.ipynb_checkpoints/
