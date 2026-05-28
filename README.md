@@ -74,7 +74,7 @@ Spark Data Processing
 취소율 분석
         ↓
 결과 시각화 및 리포트
-
+```
 
 구현 단계:
   1. Kaggle에서 Hotel Booking Demand Dataset을 다운로드한다.
