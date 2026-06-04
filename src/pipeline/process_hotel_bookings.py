@@ -1,6 +1,7 @@
+# -*- coding: utf-8 -*-
+
 from pyspark.sql import SparkSession
 from pyspark.sql.functions import col
-
 
 spark = SparkSession.builder \
     .appName("HotelBookingPreprocessing") \
@@ -11,7 +12,6 @@ output_path = "hdfs:///user/maria_dev/hotel_booking/processed"
 
 df = spark.read.csv(input_path, header=True, inferSchema=True)
 
-# Chọn các cột cần phân tích
 selected_df = df.select(
     "hotel",
     "is_canceled",
@@ -32,18 +32,18 @@ selected_df = df.select(
     "batch_id"
 )
 
-# Xử lý dữ liệu thiếu cơ bản
 clean_df = selected_df.na.fill({
     "children": 0,
     "country": "Unknown",
     "adr": 0
 })
 
-# Lọc dữ liệu bất thường
 clean_df = clean_df.filter(col("adr") >= 0)
 clean_df = clean_df.filter(col("adults") > 0)
 
 clean_df.write.mode("overwrite").parquet(output_path)
 
 print("Preprocessing completed.")
+print("Total rows: %d" % clean_df.count())
+
 spark.stop()
