@@ -7,6 +7,13 @@ hotel_bookings.csv
 !data/sample/
 !data/sample/*.csv
 
+# Allow analysis result CSV
+!output/results/
+!output/results/*.csv
+
+# Ignore Hadoop checksum files
+*.crc
+
 # System files
 .DS_Store
 __pycache__/
